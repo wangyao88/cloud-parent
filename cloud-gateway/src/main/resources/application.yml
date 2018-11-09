@@ -17,9 +17,11 @@ spring:
           filters:
           - StripPrefix=1
         - id: work
-          uri: http://127.0.0.1:7104/
+          uri: lb://cloud-work
           predicates:
           - Path=/work/**
+          filters:
+          - StripPrefix=1
 
 feign:
   hystrix:
