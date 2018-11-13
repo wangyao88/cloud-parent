@@ -1,5 +1,6 @@
 package com.sxkl.project.cloudnote.note.service;
 
+import com.sxkl.project.cloudnote.article.service.ArticeService;
 import com.sxkl.project.cloudnote.common.OperationResult;
 import com.sxkl.project.cloudnote.note.dao.NoteDao;
 import com.sxkl.project.cloudnote.note.entity.Note;
@@ -14,6 +15,8 @@ public class NoteServiceImpl implements NoteService {
 
     @Autowired
     private NoteDao noteDao;
+    @Autowired
+    private ArticeService articeService;
 
     @Override
     public OperationResult save(Note note) {
@@ -28,11 +31,18 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public OperationResult delete(String id) {
         try {
-//            noteDao.deleteById();
+            noteDao.deleteById(id);
             return OperationResult.buildDefaultSuccess();
         } catch (Exception e) {
             return OperationResult.buildFail("笔记本保存失败");
         }
+    }
+
+    @Override
+    public OperationResult forceDelete(String id) {
+
+
+        return null;
     }
 
     @Override

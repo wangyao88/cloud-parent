@@ -13,6 +13,8 @@ public interface NoteService {
 
     OperationResult delete(String id);
 
+    OperationResult forceDelete(String id);
+
     OperationResult update(Note note);
 
     Note findById(String id);
