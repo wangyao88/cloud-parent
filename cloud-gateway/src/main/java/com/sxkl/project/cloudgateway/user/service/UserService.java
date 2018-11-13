@@ -1,21 +1,24 @@
 package com.sxkl.project.cloudgateway.user.service;
 
-import com.sxkl.project.cloudgateway.common.entity.OperationResult;
 import com.sxkl.project.cloudgateway.user.entity.User;
-
-import java.util.List;
+import org.springframework.web.reactive.function.server.ServerRequest;
+import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface UserService {
 
-    OperationResult registe(User user);
+    Mono<ServerResponse> registe(ServerRequest request);
 
-    OperationResult update(User user);
+    Mono<ServerResponse> update(ServerRequest request);
 
-    OperationResult delete(User user);
+    Mono<ServerResponse> delete(ServerRequest request);
 
-    User fingdOne(Long id);
+    Mono<ServerResponse> fingdOne(ServerRequest request);
 
-    List<User> findAll();
+    Mono<ServerResponse> login(ServerRequest request);
 
-    List<User> findPage(int index, int size, User user);
+    Mono<ServerResponse> findAll(ServerRequest request);
+
+    Mono<ServerResponse> findPage(ServerRequest request);
 }

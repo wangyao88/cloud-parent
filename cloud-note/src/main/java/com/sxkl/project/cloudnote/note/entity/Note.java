@@ -1,17 +1,16 @@
-package com.sxkl.project.cloudgateway.user.entity;
-
+package com.sxkl.project.cloudnote.note.entity;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "user")
 @Data
-public class User {
+@Document(collection = "note")
+public class Note {
 
     @Id
     private ObjectId id;
     private String name;
-    private String password;
+    private ObjectId userId;
 }
