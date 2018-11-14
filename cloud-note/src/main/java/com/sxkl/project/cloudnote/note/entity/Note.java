@@ -1,7 +1,6 @@
 package com.sxkl.project.cloudnote.note.entity;
 
 import lombok.Data;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,7 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Note {
 
     @Id
-    private ObjectId id;
+    private String id;
     private String name;
-    private ObjectId userId;
+    private String userId;
+
+    public Note() {}
+
+    public Note(String name) {
+        this.name = name;
+    }
 }

@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.sxkl.project.cloudnote.flag.entity.Flag;
 import com.sxkl.project.cloudnote.note.entity.Note;
 import lombok.Data;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,15 +15,15 @@ import java.util.List;
 public class Article {
 
     @Id
-    private ObjectId id;
+    private String id;
     private String tile;
-    private List<Note> notes = Lists.newArrayList();
-    private List<Flag> flags = Lists.newArrayList();
+    private List<String> noteIds = Lists.newArrayList();
+    private List<String> flagIds = Lists.newArrayList();
     private String shotDescription;
     private String content;
     private Date createDate;
     private Date lastUpdateDate;
     private Boolean shared = Boolean.FALSE;
     private Boolean favourite = Boolean.FALSE;
-    private ObjectId userId;
+    private String userId;
 }

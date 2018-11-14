@@ -11,9 +11,9 @@ public interface NoteService {
 
     OperationResult save(Note note);
 
-    OperationResult delete(String id);
+    OperationResult deleteById(String id);
 
-    OperationResult forceDelete(String id);
+    OperationResult forceDeleteById(String id);
 
     OperationResult update(Note note);
 

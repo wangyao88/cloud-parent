@@ -22,5 +22,5 @@ public interface ArticeService {
 
     Page<Article> findPage(int page, int size);
 
-    int countByNoteId(String noteId);
+    long countByNoteId(String noteId);
 }
