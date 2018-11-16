@@ -10,44 +10,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/note")
-public class NoteController {
+public class NoteController{
 
     @Autowired
     private NoteService noteService;
 
-    @PostMapping("/save")
+    @PostMapping("/noteSave")
     public OperationResult save(@RequestBody Note note) {
         return noteService.save(note);
     }
 
-    @PostMapping("/deleteById")
+    @PostMapping("/noteDeleteById")
     public OperationResult deleteById(String noteId) {
         return noteService.deleteById(noteId);
     }
 
-    @PostMapping("/forceDeleteById")
+    @PostMapping("/noteForceDeleteById")
     public OperationResult forceDeleteById(String noteId) {
         return noteService.forceDeleteById(noteId);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/noteUpdate")
     public OperationResult update(@RequestBody Note note) {
         return noteService.update(note);
     }
 
-    @GetMapping("/findById")
+    @GetMapping("/noteFindById")
     public Note findById(String noteId) {
         return noteService.findById(noteId);
     }
 
-    @GetMapping("/findAll")
-    public List<Note> findAll(String noteId) {
-        return noteService.findAll();
+    @GetMapping("/noteFindAll")
+    public List<Note> findAll(String userId) {
+        return noteService.findAll(userId);
     }
 
-    @GetMapping("/findPage")
-    public Page<Note> findPage(int page, int size) {
-        return noteService.findPage(page,size);
+    @GetMapping("/noteFindPage")
+    public Page<Note> findPage(Note note, int page, int size) {
+        return noteService.findPage(note,page,size);
     }
 }

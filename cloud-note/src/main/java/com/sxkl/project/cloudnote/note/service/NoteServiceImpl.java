@@ -5,9 +5,11 @@ import com.sxkl.project.cloudnote.common.OperationResult;
 import com.sxkl.project.cloudnote.job.JobManager;
 import com.sxkl.project.cloudnote.note.dao.NoteDao;
 import com.sxkl.project.cloudnote.note.entity.Note;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -23,9 +25,9 @@ public class NoteServiceImpl implements NoteService {
     @Autowired
     private NoteDao noteDao;
     @Autowired
-    private ArticeService articeService;
-    @Autowired
     private MongoTemplate mongoTemplate;
+    @Autowired
+    private ArticeService articeService;
 
     @Override
     public OperationResult save(Note note) {
@@ -81,16 +83,29 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public Note findById(String id) {
-        return mongoTemplate.findById(id,Note.class);
+        return noteDao.findById(id).orElse(new Note());
     }
 
     @Override
-    public List<Note> findAll() {
-        return mongoTemplate.findAll(Note.class);
+    public List<Note> findAll(String userId) {
+        Note note = new Note();
+        note.setUserId(userId);
+        return noteDao.findAll(Example.of(note));
     }
 
     @Override
-    public Page<Note> findPage(int page, int size) {
-        return noteDao.findAll(PageRequest.of(page,size));
+    public Page<Note> findPage(Note note, int page, int size) {
+        Criteria criteria = new Criteria();
+        Query query = new Query();
+        query.skip(page*size).limit(size);
+        if(!StringUtils.isEmpty(note.getUserId())) {
+            query.addCriteria(Criteria.where("userId").is(note.getUserId()));
+        }
+        if(!StringUtils.isEmpty(note.getName())) {
+            query.addCriteria(Criteria.where("name").alike(Example.of(note.getName())));
+        }
+        long count = mongoTemplate.count(query, Note.class);
+        List<Note> notes = mongoTemplate.find(query, Note.class);
+        return new PageImpl<Note>(notes,PageRequest.of(page,size),count);
     }
 }

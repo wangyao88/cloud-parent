@@ -12,6 +12,8 @@ public abstract class BaseJob {
     protected String name;
     protected Boolean status;
     protected Date createDate;
+    protected Date finishDate;
+    protected Long costTime;
     protected Object data;
 
     public abstract void doJob();

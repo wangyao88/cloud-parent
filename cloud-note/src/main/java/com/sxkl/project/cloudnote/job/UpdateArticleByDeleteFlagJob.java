@@ -8,14 +8,14 @@ import java.util.Date;
 import java.util.UUID;
 
 @Data
-public class UpdateArticleByDeleteNoteJob extends BaseJob {
+public class UpdateArticleByDeleteFlagJob extends BaseJob {
 
-    public UpdateArticleByDeleteNoteJob(){}
+    public UpdateArticleByDeleteFlagJob(){}
 
-    public UpdateArticleByDeleteNoteJob(String noteId) {
-        UpdateArticleByDeleteNoteJob job = new UpdateArticleByDeleteNoteJob();
+    public UpdateArticleByDeleteFlagJob(String noteId) {
+        UpdateArticleByDeleteFlagJob job = new UpdateArticleByDeleteFlagJob();
         job.setId(UUID.randomUUID().toString());
-        job.setName("更新笔记本关联的笔记"+noteId);
+        job.setName("更新标签关联的笔记"+noteId);
         job.setData(noteId);
         job.setCreateDate(new Date());
     }

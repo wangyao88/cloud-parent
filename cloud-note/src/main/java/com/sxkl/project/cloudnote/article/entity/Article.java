@@ -26,4 +26,10 @@ public class Article {
     private Boolean shared = Boolean.FALSE;
     private Boolean favourite = Boolean.FALSE;
     private String userId;
+
+    public Article(){}
+
+    public Article(String id) {
+        this.id = id;
+    }
 }

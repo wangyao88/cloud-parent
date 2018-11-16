@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface NoteService {
+public interface NoteService{
 
     OperationResult save(Note note);
 
@@ -19,7 +19,8 @@ public interface NoteService {
 
     Note findById(String id);
 
-    List<Note> findAll();
+    List<Note> findAll(String userId);
 
-    Page<Note> findPage(int page, int size);
+    Page<Note> findPage(Note note, int page, int size);
+
 }

@@ -10,6 +10,9 @@ public class JobManager {
 
     private JobManager(){}
 
+    public static void startUpdateArticleByDeleteFlagJob(String id) {
+    }
+
     private static class Singleton {
         private static final JobManager JOB_MANAGER = new JobManager();
     }
